@@ -17,20 +17,8 @@ export class TeamsOverview implements OnInit {
       { name: "Jeppe", sex: "m" },
       { name: "Sophia", sex: "f" },
       { name: "Joji", sex: "f" },
-      { name: "Alberto", sex: "f" }
+      { name: "Alberto", sex: "m" }
     ];
-  }
-
-  public addMember(): void {
-    if (this.members.length < 5) {
-      const newMember = {
-        name: "",
-        sex: ""
-      };
-      this.members.push(newMember);
-    } else {
-      this.maxMembers = true;
-    }
   }
 }
 
