@@ -1,5 +1,7 @@
 {
   "name": "trash-picking/",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
