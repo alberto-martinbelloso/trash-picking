@@ -14,4 +14,4 @@ import { TeamsOverview } from './teams.page';
   ],
   declarations: [TeamsOverview]
 })
-export class Tab1PageModule {}
+export class TeamsOverviewPageModule {}

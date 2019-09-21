@@ -8,22 +8,22 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'teams',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../teams/teams.module').then(m => m.Tab1PageModule)
+              import('../teams/teams.module').then(m => m.TeamsOverviewPageModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'dashboard',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../dashboard/dashboard.module').then(m => m.DashboardPageModule)
           }
         ]
       },
@@ -39,14 +39,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/teams',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/teams',
     pathMatch: 'full'
   }
 ];

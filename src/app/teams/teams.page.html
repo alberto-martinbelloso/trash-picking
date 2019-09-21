@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title text-center>
       Teams Overview
     </ion-title>
   </ion-toolbar>
@@ -9,10 +9,16 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Team Members</ion-card-title>
-      <ion-button (click)="addMember()" color="secondary" size="small"
-        >Add member</ion-button
-      >
+      <ion-row>
+        <ion-col size="8">
+          <ion-card-title>Team Members</ion-card-title>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="addMember()" size="small"
+            >Add member</ion-button
+          >
+        </ion-col>
+      </ion-row>
     </ion-card-header>
 
     <ion-card-content>
@@ -38,12 +44,12 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>QR code of your team</ion-card-title>
+      <ion-card-title text-center>QR code of your team</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-img
-        style="width:200px; height:200px;"
+        style="width:200px; height:200px; margin: 0 auto"
         src="../../assets/qr-code.png"
       ></ion-img>
     </ion-card-content>
