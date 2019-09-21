@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Teams Overview
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Team Members</ion-card-title>
+      <ion-button (click)="addMember()" color="secondary" size="small"
+        >Add member</ion-button
+      >
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let member of members" lines="full">
+          <ion-icon
+            *ngIf="member.sex == 'm'"
+            slot="start"
+            color="medium"
+            name="man"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="member.sex == 'f'"
+            slot="start"
+            color="medium"
+            name="woman"
+          ></ion-icon>
+          <ion-label>{{ member.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>QR code of your team</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-img
+        style="width:200px; height:200px;"
+        src="../../assets/qr-code.png"
+      ></ion-img>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-row>
+    <ion-label *ngIf="maxMembers" color="danger"
+      >Maximum number of members reached</ion-label
+    >
+  </ion-row>
+</ion-content>
