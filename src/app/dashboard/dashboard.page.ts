@@ -54,6 +54,7 @@ export class DashboardPage implements OnInit {
         ]
       },
       options: {
+        maintainAspectRatio: false,
         scales: {
           yAxes: [
             {
@@ -65,6 +66,7 @@ export class DashboardPage implements OnInit {
         }
       }
     });
+    this.barChart.height = 500;
   }
 }
 
