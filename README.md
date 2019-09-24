@@ -2,6 +2,13 @@ Trash picking at Festivals app
 
 Ionic tabs App
 
+Node.js and npm installation guide for Mac:
+https://treehouse.github.io/installation-guides/mac/node-mac.html
+
+Ionic installation for Mac:
+Open terminal and run
+  npm install -g cordova ionic
+
 Requirements:
 - Node.js
 - npm
