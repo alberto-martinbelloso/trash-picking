@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
+import { AuthService } from './../auth/auth.service';
 
 @Component({
   selector: "app-dashboard",
@@ -13,7 +14,7 @@ export class DashboardPage implements OnInit {
   public colorArray: any;
   public teams: Team[];
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.teams = [
@@ -67,6 +68,10 @@ export class DashboardPage implements OnInit {
       }
     });
     this.barChart.height = 500;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
 

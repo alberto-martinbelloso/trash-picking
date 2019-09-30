@@ -10,11 +10,18 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { AuthModule } from "./auth/auth.module";
+import { RemoveMemberModalPageModule } from "./modal/remove-member-modal/remove-member-modal.module";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AuthModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AuthModule,
+    RemoveMemberModalPageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

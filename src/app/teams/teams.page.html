@@ -1,6 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title text-center>
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
       Teams Overview
     </ion-title>
   </ion-toolbar>
@@ -9,33 +19,85 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle text-center>Team Members</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center"
+        >Team Members</ion-card-subtitle
+      >
     </ion-card-header>
 
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let member of members" lines="full">
           <ion-icon
-            *ngIf="member.sex == 'm'"
+            *ngIf="member.gender == 'male'"
             slot="start"
             color="medium"
             name="man"
           ></ion-icon>
           <ion-icon
-            *ngIf="member.sex == 'f'"
+            *ngIf="member.gender == 'female'"
             slot="start"
             color="medium"
             name="woman"
           ></ion-icon>
           <ion-label>{{ member.name }}</ion-label>
+          <ion-buttons slot="end">
+              <ion-button (click)="openModal(member)">
+                  <ion-icon slot="end" name="remove-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
         </ion-item>
       </ion-list>
+      <ion-item>
+          <ion-button (click)="adding = !adding"> Add member </ion-button>
+      </ion-item>
+
+      <form *ngIf="adding" #form="ngForm" (ngSubmit)="addMember(form)">
+          <ion-grid>
+            <ion-row color="primary" justify-content-center>
+              <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                <div class="ion-padding">
+                  <ion-item>
+                    <ion-input
+                      name="name"
+                      type="text"
+                      placeholder="Name"
+                      ngModel
+                      required
+                    ></ion-input>
+                  </ion-item>
+                </div>
+                <div class="ion-padding">
+                    <ion-item>
+                      <ion-input
+                        name="gender"
+                        type="text"
+                        placeholder="male/female"
+                        ngModel
+                        required
+                      ></ion-input>
+                    </ion-item>
+                  </div>
+                <div class="ion-padding">
+                  <ion-button
+                    size="small"
+                    type="submit"
+                    [disabled]="form.invalid"
+                    expand="block"
+                    >Add Member</ion-button
+                  >
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle text-center>Your team's QR code</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center"
+        >Your team's QR code</ion-card-subtitle
+      >
     </ion-card-header>
 
     <ion-card-content>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './../auth/auth.service';
 
 @Component({
   selector: 'app-map',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class MapPage {
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 
 }

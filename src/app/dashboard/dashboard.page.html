@@ -1,7 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title text-center>
-      Competition Dashboard
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="log-out"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    <ion-title class="ion-text-center">
+      Dashboard
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +19,9 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle text-center>Total trash collected (Kg)</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center"
+        >Total trash collected (Kg)</ion-card-subtitle
+      >
     </ion-card-header>
     <ion-card-content style="height: 250px">
       <canvas #barChart></canvas>
@@ -18,16 +30,16 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle text-center>Today's competition</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center"
+        >Today's competition</ion-card-subtitle
+      >
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let team of teams; let i = index">
           <ion-grid>
             <ion-row>
-              <ion-col size="7">
-                  #{{ i + 1 }} {{ team.name }}
-              </ion-col>
+              <ion-col size="7"> #{{ i + 1 }} {{ team.name }} </ion-col>
               <ion-col size="5"> tpp: {{ team.tpp }}kg </ion-col>
             </ion-row>
           </ion-grid>
