@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { tap } from "rxjs/operators";
-import { Observable, BehaviorSubject } from "rxjs";
+import { Observable, BehaviorSubject, of } from "rxjs";
 
 import { Storage } from "@ionic/storage";
 import { User } from "./user";
-import { AuthResponse } from "./auth-response";
+import { AuthResponse, TeamResponse } from "./auth-response";
+import { Team } from './team';
 
 @Injectable({
   providedIn: "root"
@@ -17,17 +18,16 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private storage: Storage) {}
 
   register(user: User): Observable<AuthResponse> {
-    return this.httpClient
-      .post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user)
-      .pipe(
-        tap(async (res: AuthResponse) => {
-          if (res.user) {
-            await this.storage.set("ACCESS_TOKEN", res.user.access_token);
-            await this.storage.set("EXPIRES_IN", res.user.expires_in);
-            this.authSubject.next(true);
-          }
-        })
-      );
+    return this.httpClient.post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user).pipe(
+      tap(async (res:  AuthResponse ) => {
+        if (res.user) {
+          await this.storage.set("ACCESS_TOKEN", res.user.access_token);
+          await this.storage.set("EXPIRES_IN", res.user.expires_in);
+          this.authSubject.next(true);
+        }
+      })
+
+    );
   }
 
   login(user: User): Observable<AuthResponse> {
@@ -39,6 +39,17 @@ export class AuthService {
           this.authSubject.next(true);
         }
       })
+    );
+  }
+
+  createTeam(team: Team): Observable<TeamResponse> {
+    return this.httpClient.post<TeamResponse>(`${this.AUTH_SERVER_ADDRESS}/create-team`, team).pipe(
+      tap(async (res:  TeamResponse ) => {
+        if (res.team) {
+          this.authSubject.next(true);
+        }
+      })
+
     );
   }
 

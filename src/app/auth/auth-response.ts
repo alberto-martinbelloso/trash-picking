@@ -7,3 +7,10 @@ export interface AuthResponse {
     expires_in: number;
   };
 }
+
+export interface TeamResponse {
+  team: {
+    id: number;
+    name: string;
+  };
+}

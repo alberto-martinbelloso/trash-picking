@@ -41,7 +41,6 @@ export class TeamsOverview implements OnInit {
     });
 
     modal.onDidDismiss().then(dataReturned => {
-      console.log("im here");
       if (dataReturned.data) {
         this.members = this.members.filter(function(el) {
           return el !== member;

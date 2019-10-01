@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthService } from './auth/auth.service';
-import { Router } from '@angular/router';
-
+import { Platform } from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { AuthService } from "./auth/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"]
 })
 export class AppComponent {
   constructor(
@@ -19,7 +18,6 @@ export class AppComponent {
     private statusBar: StatusBar,
     private authenticationService: AuthService,
     private router: Router
-
   ) {
     this.initializeApp();
   }
@@ -31,10 +29,10 @@ export class AppComponent {
     });
 
     this.authenticationService.authSubject.subscribe(state => {
-      if (state || 1==1) {
-        this.router.navigate(['tabs/teams']);
+      if (state) {
+        this.router.navigate(["tabs/teams"]);
       } else {
-        this.router.navigate(['login']);
+        this.router.navigate(["login"]);
       }
     });
   }
