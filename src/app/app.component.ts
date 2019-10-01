@@ -29,9 +29,7 @@ export class AppComponent {
     });
 
     this.authenticationService.authSubject.subscribe(state => {
-      if (state) {
-        this.router.navigate(["tabs/teams"]);
-      } else {
+      if (!state) {
         this.router.navigate(["login"]);
       }
     });

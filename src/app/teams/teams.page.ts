@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./../auth/auth.service";
 import { ModalController } from "@ionic/angular";
 import { RemoveMemberModalPage } from "../modal/remove-member-modal/remove-member-modal.page";
+import { User } from "../auth/user";
+import { Storage } from "@ionic/storage";
 
 @Component({
   selector: "app-teams",
@@ -11,12 +13,23 @@ import { RemoveMemberModalPage } from "../modal/remove-member-modal/remove-membe
 export class TeamsOverview implements OnInit {
   constructor(
     private authService: AuthService,
-    public modalController: ModalController
-  ) {}
+    public modalController: ModalController,
+    private storage: Storage
+  ) {
+    this.user = {
+      email: "",
+      name: "",
+      password: "",
+      teamId: 0,
+      teamName: "",
+      userId: 0
+    };
+  }
 
   public members: Member[];
   public adding: boolean;
-  public dataReturned: any;
+  public user: User;
+  public team: string;
 
   public ngOnInit() {
     this.members = [
@@ -26,6 +39,10 @@ export class TeamsOverview implements OnInit {
       { name: "Alberto", gender: "male" }
     ];
     this.adding = false;
+    this.storage.get("USER").then(user => {
+      this.user = user;
+      this.team = this.user.teamName;
+    });
   }
 
   public addMember(form) {
@@ -47,7 +64,7 @@ export class TeamsOverview implements OnInit {
         });
       }
     });
-    
+
     await modal.present();
   }
 

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Create or join a team</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="createTeam()"> Create Team </ion-button>
+      <ion-button (click)="join = !join"> Join Team </ion-button>
+    </ion-row>
+  </ion-grid>
+
+  <form #form="ngForm" *ngIf="join" (ngSubmit)="joinTeam(form)">
+    <ion-grid>
+      <ion-row color="primary" class="ion-justify-content-center">
+        <ion-col
+          class="ion-align-self-center"
+          size-md="6"
+          size-lg="5"
+          size-xs="12"
+        >
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input
+                name="teamName"
+                type="text"
+                placeholder="Name"
+                ngModel
+                required
+              ></ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button
+              size="large"
+              type="submit"
+              [disabled]="form.invalid"
+              expand="block"
+              >Join Team</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -17,6 +17,7 @@ const routes: Routes = [
     loadChildren: "./auth/create-team/create-team.module#CreateTeamPageModule"
   },
   { path: 'add-member', loadChildren: './auth/add-member/add-member.module#AddMemberPageModule' },
+  { path: 'create-join-team', loadChildren: './auth/create-join-team/create-join-team.module#CreateJoinTeamPageModule' },
 ];
 
 @NgModule({

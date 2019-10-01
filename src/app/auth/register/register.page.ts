@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
 
   register(form) {
     this.authService.register(form.value).subscribe(res => {
-      this.router.navigateByUrl("tabs/teams");
+      this.router.navigateByUrl("/create-join-team");
     });
   }
 }
