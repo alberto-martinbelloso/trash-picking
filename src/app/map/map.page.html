@@ -1,13 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title text-center>
-      Roskilde Festival Map
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/show-profile/']">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Festival Map
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-img src="../../assets/map.png"></ion-img>
-  <ion-img src="../../assets/map.png"></ion-img>
-  <ion-img src="../../assets/map.png"></ion-img>
+  <!-- <ion-img src="../../assets/map.png"></ion-img> -->
+
+  <div id="map" style="width:100%; height:100%"></div>
 </ion-content>
