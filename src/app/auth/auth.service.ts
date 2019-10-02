@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { tap } from "rxjs/operators";
+import { tap, catchError } from "rxjs/operators";
 import { Observable, BehaviorSubject, of } from "rxjs";
 
 import { Storage } from "@ionic/storage";
@@ -40,7 +40,6 @@ export class AuthService {
           await this.storage.set("ACCESS_TOKEN", res.user.access_token);
           await this.storage.set("EXPIRES_IN", res.user.expires_in);
           await this.storage.set("USER", res.user);
-          console.log(res.user);
           this.authSubject.next(true);
         }
       })
@@ -65,9 +64,9 @@ export class AuthService {
       );
   }
 
-  joinTeam(teamName: string, user: User): Observable<any> {
+  joinTeam(team: Team, user: User): Observable<any> {
     const body = {
-      teamName: teamName,
+      team: team,
       user: user
     };
     return this.httpClient
@@ -75,9 +74,40 @@ export class AuthService {
       .pipe(
         tap(async (res: any) => {
           if (res) {
-            user.teamName = res.teamName.teamName;
+            user.teamName = res.teamName;
             await this.storage.set("USER", user);
             this.authSubject.next(true);
+          }
+        })
+      );
+  }
+
+  getTeamMembers(teamName: string): Observable<User[]> {
+    const body = {
+      teamName: teamName
+    };
+    return this.httpClient
+      .post(`${this.AUTH_SERVER_ADDRESS}/get-team-members`, body)
+      .pipe(
+        tap(async (res: any) => {
+          if (res) {
+            return res;
+          }
+        })
+      );
+  }
+
+  addMember(email: string, teamName: string): Observable<any> {
+    const body = {
+      email: email,
+      teamName: teamName
+    };
+    return this.httpClient
+      .post(`${this.AUTH_SERVER_ADDRESS}/add-member`, body)
+      .pipe(
+        tap(async (res: any) => {
+          if (res) {
+            return res;
           }
         })
       );

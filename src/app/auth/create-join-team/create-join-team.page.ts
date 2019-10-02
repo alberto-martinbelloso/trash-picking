@@ -40,8 +40,15 @@ export class CreateJoinTeamPage implements OnInit {
   }
 
   joinTeam(form) {
-    this.authService.joinTeam(form.value, this.user).subscribe(res => {
-      this.router.navigateByUrl("/tabs/teams");
+    this.storage.get("USER").then(user => {
+      this.user = user;
+      this.authService.joinTeam(form.value, this.user).subscribe(res => {
+        this.router.navigateByUrl("/tabs/map");
+      });
     });
+  }
+
+  omit() {
+    this.router.navigateByUrl("/tabs/map");
   }
 }

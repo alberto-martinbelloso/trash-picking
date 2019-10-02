@@ -10,6 +10,9 @@
       <ion-button (click)="createTeam()"> Create Team </ion-button>
       <ion-button (click)="join = !join"> Join Team </ion-button>
     </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <ion-button (click)="omit()"> Omit </ion-button>
+    </ion-row>
   </ion-grid>
 
   <form #form="ngForm" *ngIf="join" (ngSubmit)="joinTeam(form)">

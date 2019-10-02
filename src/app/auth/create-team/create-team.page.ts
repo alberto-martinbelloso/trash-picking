@@ -34,7 +34,7 @@ export class CreateTeamPage implements OnInit {
 
   createTeam(form) {
     this.authService.createTeam(form.value, this.user).subscribe(res => {
-      this.router.navigateByUrl("tabs/teams");
+      this.router.navigateByUrl("tabs/map");
     });
   }
 }
