@@ -3,6 +3,7 @@ import { AuthService } from "./../auth.service";
 import { Router } from "@angular/router";
 import { Storage } from "@ionic/storage";
 import { User } from "../user";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-create-team",
@@ -14,7 +15,8 @@ export class CreateTeamPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private location: Location
   ) {
     this.user = {
       email: "",
@@ -36,5 +38,9 @@ export class CreateTeamPage implements OnInit {
     this.authService.createTeam(form.value, this.user).subscribe(res => {
       this.router.navigateByUrl("tabs/map");
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

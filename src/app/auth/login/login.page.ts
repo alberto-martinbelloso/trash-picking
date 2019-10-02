@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
 
   login(form) {
     this.authService.login(form.value).subscribe(res => {
-      this.router.navigateByUrl("tabs/teams");
+      this.router.navigateByUrl("tabs/map");
     });
   }
 }

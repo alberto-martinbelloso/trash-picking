@@ -10,9 +10,14 @@
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">
+    <ion-title *ngIf="team; else noTeam" class="ion-text-center">
       {{ team }}
     </ion-title>
+    <ng-template #noTeam>
+      <ion-title class="ion-text-center">
+        Team
+      </ion-title>
+    </ng-template>
   </ion-toolbar>
 </ion-header>
 
@@ -30,7 +35,11 @@
           <ion-label>{{ member.name }}</ion-label>
           <ion-buttons slot="end">
             <ion-button (click)="openModal(member)">
-              <ion-icon slot="end" name="remove-circle-outline"></ion-icon>
+              <ion-icon
+                slot="end"
+                color="danger"
+                name="remove-circle-outline"
+              ></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-item>
@@ -97,8 +106,8 @@
   </ion-card>
 
   <ion-grid *ngIf="!team">
-      <ion-row class="ion-justify-content-center">
-        <ion-button (click)="createTeam()"> Create Team </ion-button>
-      </ion-row>
-    </ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="createTeam()"> Create Team </ion-button>
+    </ion-row>
+  </ion-grid>
 </ion-content>
