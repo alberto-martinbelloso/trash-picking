@@ -12,8 +12,8 @@ import { Team } from "./team";
   providedIn: "root"
 })
 export class AuthService {
-  // AUTH_SERVER_ADDRESS: string = "http://192.168.8.106:3000";
-  AUTH_SERVER_ADDRESS: string = "http://localhost:3000";
+  AUTH_SERVER_ADDRESS: string = "http://ec2-13-58-209-11.us-east-2.compute.amazonaws.com:3000";
+  // AUTH_SERVER_ADDRESS: string = "http://localhost:3000";
   authSubject = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient, private storage: Storage) {}
