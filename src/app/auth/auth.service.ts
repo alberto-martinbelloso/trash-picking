@@ -113,6 +113,18 @@ export class AuthService {
       );
   }
 
+  removeMember(member: User): Observable<any> {
+    return this.httpClient
+      .post(`${this.AUTH_SERVER_ADDRESS}/remove-member`, member)
+      .pipe(
+        tap(async (res: any) => {
+          if (res) {
+            return res;
+          }
+        })
+      );
+  }
+
   async logout() {
     await this.storage.remove("ACCESS_TOKEN");
     await this.storage.remove("EXPIRES_IN");

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ModalController, NavParams } from "@ionic/angular";
-import { Member } from "src/app/teams/teams.page";
 
 @Component({
   selector: "app-remove-member-modal",

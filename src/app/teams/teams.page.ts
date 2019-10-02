@@ -4,7 +4,7 @@ import { ModalController } from "@ionic/angular";
 import { RemoveMemberModalPage } from "../modal/remove-member-modal/remove-member-modal.page";
 import { User } from "../auth/user";
 import { Storage } from "@ionic/storage";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 
 @Component({
@@ -42,20 +42,18 @@ export class TeamsOverview implements OnInit {
     this.adding = false;
   }
 
-  async openModal(member: Member) {
+  async openModal(member: User) {
     const modal = await this.modalController.create({
       component: RemoveMemberModalPage,
       componentProps: member,
       cssClass: "my-custom-modal-css"
     });
 
-    // modal.onDidDismiss().then(dataReturned => {
-    //   if (dataReturned.data) {
-    //     this.members = this.members.filter(function(el) {
-    //       return el !== member;
-    //     });
-    //   }
-    // });
+    modal.onDidDismiss().then(dataReturned => {
+      if (dataReturned.data) {
+        this.members$ = this.authService.removeMember(member);
+      }
+    });
 
     await modal.present();
   }
@@ -67,9 +65,4 @@ export class TeamsOverview implements OnInit {
   logout() {
     this.authService.logout();
   }
-}
-
-export interface Member {
-  name: string;
-  gender: string;
 }
