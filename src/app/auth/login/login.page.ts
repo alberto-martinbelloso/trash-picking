@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -9,9 +9,10 @@ import { Observable } from 'rxjs';
   styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
-  
   public isLoggedIn$: Observable<boolean>;
-  
+
+  public errorMessage: string;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
@@ -20,7 +21,11 @@ export class LoginPage implements OnInit {
 
   login(form) {
     this.authService.login(form.value).subscribe(res => {
-      this.router.navigateByUrl("tabs/map");
+      if (res.error) {
+        this.errorMessage = res.error;
+      } else {
+        this.router.navigateByUrl("tabs/map");
+      }
     });
   }
 }

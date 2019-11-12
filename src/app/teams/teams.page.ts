@@ -4,7 +4,7 @@ import { ModalController } from "@ionic/angular";
 import { RemoveMemberModalPage } from "../modal/remove-member-modal/remove-member-modal.page";
 import { User } from "../auth/user";
 import { Storage } from "@ionic/storage";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 
 @Component({
@@ -25,6 +25,7 @@ export class TeamsOverview implements OnInit {
   public adding: boolean;
   public user: User;
   public team: string;
+  public errorMessage: string;
 
   public ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -38,7 +39,14 @@ export class TeamsOverview implements OnInit {
   }
 
   public addMember(form) {
-    this.members$ = this.authService.addMember(form.value.email, this.team);
+    this.authService.addMember(form.value.email, this.team).subscribe(res => {
+      if (res.error) {
+        this.errorMessage = res.error;
+      } else {
+        this.members$ = of(res);
+        this.router.navigateByUrl("tabs/teams");
+      }
+    });
     this.adding = false;
   }
 
@@ -58,8 +66,8 @@ export class TeamsOverview implements OnInit {
     await modal.present();
   }
 
-  createTeam() {
-    this.router.navigateByUrl("/create-team");
+  createOrJoinTeam() {
+    this.router.navigateByUrl("/create-join-team");
   }
 
   logout() {

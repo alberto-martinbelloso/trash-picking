@@ -12,6 +12,7 @@ import { Storage } from "@ionic/storage";
 export class CreateJoinTeamPage implements OnInit {
   public user: User;
   public join: boolean;
+  public errorMessage: string;
 
   constructor(
     private authService: AuthService,
@@ -43,7 +44,11 @@ export class CreateJoinTeamPage implements OnInit {
     this.storage.get("USER").then(user => {
       this.user = user;
       this.authService.joinTeam(form.value, this.user).subscribe(res => {
-        this.router.navigateByUrl("/tabs/map");
+        if (res.error) {
+          this.errorMessage = res.error;
+        } else {
+          this.router.navigateByUrl("/tabs/map");
+        }
       });
     });
   }

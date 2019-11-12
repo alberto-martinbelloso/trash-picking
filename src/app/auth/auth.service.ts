@@ -12,15 +12,15 @@ import { Team } from "./team";
   providedIn: "root"
 })
 export class AuthService {
-  AUTH_SERVER_ADDRESS: string = "http://ec2-13-58-209-11.us-east-2.compute.amazonaws.com:3000";
+  AUTH_SERVER_ADDRESS: string =
+    "http://ec2-13-58-209-11.us-east-2.compute.amazonaws.com:3000";
   // AUTH_SERVER_ADDRESS: string = "http://localhost:3000";
   authSubject = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-  register(user: User): Observable<AuthResponse> {
-    return this.httpClient
-      .post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user)
+  register(user: User): Observable<any> {
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/register`, user)
       .pipe(
         tap(async (res: AuthResponse) => {
           if (res.user) {
@@ -29,11 +29,12 @@ export class AuthService {
             await this.storage.set("USER", res.user);
             this.authSubject.next(true);
           }
-        })
+        }),
+        catchError(error => of(error))
       );
   }
 
-  login(user: User): Observable<AuthResponse> {
+  login(user: User): Observable<any> {
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
       tap(async (res: AuthResponse) => {
         if (res.user) {
@@ -42,7 +43,8 @@ export class AuthService {
           await this.storage.set("USER", res.user);
           this.authSubject.next(true);
         }
-      })
+      }),
+      catchError(error => of(error))
     );
   }
 
@@ -60,7 +62,8 @@ export class AuthService {
             await this.storage.set("USER", user);
             this.authSubject.next(true);
           }
-        })
+        }),
+        catchError(error => of(error))
       );
   }
 
@@ -78,7 +81,8 @@ export class AuthService {
             await this.storage.set("USER", user);
             this.authSubject.next(true);
           }
-        })
+        }),
+        catchError(error => of(error))
       );
   }
 
@@ -93,7 +97,8 @@ export class AuthService {
           if (res) {
             return res;
           }
-        })
+        }),
+        catchError(error => of(error))
       );
   }
 
@@ -109,7 +114,8 @@ export class AuthService {
           if (res) {
             return res;
           }
-        })
+        }),
+        catchError(error => of(error))
       );
   }
 
@@ -121,7 +127,8 @@ export class AuthService {
           if (res) {
             return res;
           }
-        })
+        }),
+        catchError(error => of(error))
       );
   }
 

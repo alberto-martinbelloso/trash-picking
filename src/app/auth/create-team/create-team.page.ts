@@ -12,6 +12,8 @@ import { Location } from "@angular/common";
 })
 export class CreateTeamPage implements OnInit {
   public user: User;
+  public errorMessage: string;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -36,7 +38,11 @@ export class CreateTeamPage implements OnInit {
 
   createTeam(form) {
     this.authService.createTeam(form.value, this.user).subscribe(res => {
-      this.router.navigateByUrl("tabs/map");
+      if (res.error) {
+        this.errorMessage = res.error;
+      } else {
+        this.router.navigateByUrl("tabs/map");
+      }
     });
   }
 

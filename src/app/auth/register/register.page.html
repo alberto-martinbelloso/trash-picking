@@ -69,3 +69,9 @@
     </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer *ngIf="errorMessage">
+    <ion-toolbar style="--background: indianred; --color: white">
+      <ion-title class="ion-text-center">{{errorMessage}}</ion-title>
+    </ion-toolbar>
+  </ion-footer>

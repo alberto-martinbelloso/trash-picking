@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Create a team</ion-title>
+    <ion-title class="ion-text-center">Create a team</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -45,3 +45,9 @@
     </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer *ngIf="errorMessage">
+  <ion-toolbar style="--background: indianred; --color: white">
+    <ion-title class="ion-text-center">{{errorMessage}}</ion-title>
+  </ion-toolbar>
+</ion-footer>

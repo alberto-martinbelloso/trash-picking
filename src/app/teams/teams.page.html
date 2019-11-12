@@ -21,7 +21,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="members$ | async">
   <ion-card *ngIf="team">
     <ion-card-header>
       <ion-card-subtitle class="ion-text-center"
@@ -107,7 +107,9 @@
 
   <ion-grid *ngIf="!team">
     <ion-row class="ion-justify-content-center">
-      <ion-button (click)="createTeam()"> Create Team </ion-button>
+      <ion-button (click)="createOrJoinTeam()">
+        Create or Join a Team
+      </ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>

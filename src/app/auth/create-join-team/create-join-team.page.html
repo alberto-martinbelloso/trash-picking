@@ -11,7 +11,7 @@
       <ion-button (click)="join = !join"> Join Team </ion-button>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-button (click)="omit()"> Omit </ion-button>
+      <ion-button (click)="omit()"> Omit </ion-button>
     </ion-row>
   </ion-grid>
 
@@ -49,3 +49,9 @@
     </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer *ngIf="errorMessage">
+  <ion-toolbar style="--background: indianred; --color: white">
+    <ion-title class="ion-text-center">{{errorMessage}}</ion-title>
+  </ion-toolbar>
+</ion-footer>
